@@ -33,8 +33,6 @@ class CartController extends Controller
         // session()->put('cart', $cart);
         $cart = Cart::firstOrCreate(['product_id' => $productId]);
         $cart->increment('quantity');
-        return redirect()->back()->with('success', 'Product added to cart!');
-
         return response()->json(['message' => 'Product added to cart successfully']);
     }
 
