@@ -49,30 +49,41 @@
                             <div class="tab-pane fade show active" id="arrival" role="tabpanel"
                                 aria-labelledby="arrival-tab">
                                 <div class="row shop_container">
-                                    @include('components.product_card', [
+                                    {{-- @include('components.product_card', [
                                         'products' => $arrival_products
-                                    ])
+                                    ]) --}}
+                                    @foreach ($arrival_products as $product)
+                                        <div class="col-lg-3 col-md-4 col-6">
+                                            @include('components.product_card', compact('product'))
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="sellers" role="tabpanel" aria-labelledby="sellers-tab">
                                 <div class="row shop_container">
-                                    @include('components.product_card', [
-                                        'products' => $bestseller_products
-                                    ])
+                                    @foreach ($bestseller_products as $product)
+                                        <div class="col-lg-3 col-md-4 col-6">
+                                            @include('components.product_card', compact('product'))
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="featured" role="tabpanel" aria-labelledby="featured-tab">
                                 <div class="row shop_container">
-                                    @include('components.product_card', [
-                                        'products' => $featured_products
-                                    ])
+                                    @foreach ($featured_products as $product)
+                                        <div class="col-lg-3 col-md-4 col-6">
+                                            @include('components.product_card', compact('product'))
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="special" role="tabpanel" aria-labelledby="special-tab">
                                 <div class="row shop_container">
-                                    @include('components.product_card', [
-                                        'products' => $special_products
-                                    ])
+                                    @foreach ($special_products as $product)
+                                        <div class="col-lg-3 col-md-4 col-6">
+                                            @include('components.product_card', compact('product'))
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -87,7 +98,7 @@
         <!-- END SECTION SINGLE BANNER -->
 
         <!-- START SECTION SHOP -->
-        @include('components.featured_products',compact('featured_products'))
+        @include('components.featured_products', compact('featured_products'))
         <!-- END SECTION SHOP -->
 
         <!-- START SECTION TESTIMONIAL -->
