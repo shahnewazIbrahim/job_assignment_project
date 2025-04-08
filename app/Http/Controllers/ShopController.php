@@ -9,8 +9,9 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $products = Product::latest()->get();
-        return view('shop.index', compact('products'));
+        // $products = Product::latest()->get();
+        // return view('shop.index', compact('products'));
+        return view('home');
     }
 
     public function show($id)
