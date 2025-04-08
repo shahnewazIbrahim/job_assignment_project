@@ -83,11 +83,11 @@
         <!-- END SECTION SHOP -->
 
         <!-- START SECTION SINGLE BANNER -->
-        @include('components.single_banner')
+        @include('components.single_banner', compact('single_banner'))
         <!-- END SECTION SINGLE BANNER -->
 
         <!-- START SECTION SHOP -->
-        @include('components.featured_products')
+        @include('components.featured_products',compact('featured_products'))
         <!-- END SECTION SHOP -->
 
         <!-- START SECTION TESTIMONIAL -->

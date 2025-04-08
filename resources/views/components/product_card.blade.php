@@ -51,9 +51,9 @@
                 </div>
                 <div class="rating_wrap">
                     <div class="rating">
-                        <div class="product_rate" style="width: 80%"></div>
+                        <div class="product_rate" style="width: {{ ($product->rating / 5) * 100 }}%"></div>
                     </div>
-                    <span class="rating_num">(21)</span>
+                    <span class="rating_num">({{ $product->rating_count }})</span>
                 </div>
                 <div class="pr_desc">
                     <p>
