@@ -9,7 +9,7 @@
     <!-- END SECTION BANNER -->
     <div class="main_content">
         <!-- START SECTION BANNER -->
-        @include('components.section_banner')
+        @include('components.section_banner', compact('banners'))
         <!-- END SECTION BANNER -->
 
         <!-- START SECTION SHOP -->
