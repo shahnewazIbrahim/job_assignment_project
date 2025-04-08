@@ -67,7 +67,7 @@
     <div class="bottom_header dark_skin main_menu_uppercase">
       <div class="container">
         <nav class="navbar navbar-expand-lg">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="{{ url('/') }}">
             <img
               class="logo_light"
               src="{{ asset('images/logo_light.png') }}"
@@ -105,7 +105,7 @@
                     <li>
                       <a
                         class="dropdown-item nav-link nav_item active"
-                        href="index.html"
+                        href="{{ url('/') }}"
                         >Fashion 1</a
                       >
                     </li>
