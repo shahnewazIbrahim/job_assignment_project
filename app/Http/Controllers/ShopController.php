@@ -10,10 +10,20 @@ class ShopController extends Controller
 {
     public function index()
     {
-        // $products = Product::latest()->get();
+        $allProducts = Product::whereIn('type', ['arrival', 'bestseller', 'featured', 'special'])
+            ->where('status', 1)
+            ->latest()
+            ->get()
+            ->groupBy('type');
+
+        $arrival_products = $allProducts->get('arrival', collect());
+        $bestseller_products = $allProducts->get('bestseller', collect());
+        $featured_products = $allProducts->get('featured', collect());
+        $special_products = $allProducts->get('special', collect());
+
         $banners = BannerSlider::get();
         // return view('shop.index', compact('products'));
-        return view('home', compact('banners'));
+        return view('home', compact('banners', 'arrival_products', 'bestseller_products', 'featured_products', 'special_products'));
     }
 
     public function show($id)
@@ -21,5 +31,4 @@ class ShopController extends Controller
         $product = Product::findOrFail($id);
         return view('shop.product', compact('product'));
     }
-
 }

@@ -49,22 +49,30 @@
                             <div class="tab-pane fade show active" id="arrival" role="tabpanel"
                                 aria-labelledby="arrival-tab">
                                 <div class="row shop_container">
-                                    @include('components.arrival_product_card')
+                                    @include('components.product_card', [
+                                        'products' => $arrival_products
+                                    ])
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="sellers" role="tabpanel" aria-labelledby="sellers-tab">
                                 <div class="row shop_container">
-                                    @include('components.sellers_product_card')
+                                    @include('components.product_card', [
+                                        'products' => $bestseller_products
+                                    ])
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="featured" role="tabpanel" aria-labelledby="featured-tab">
                                 <div class="row shop_container">
-                                    @include('components.featured_product_card')
+                                    @include('components.product_card', [
+                                        'products' => $featured_products
+                                    ])
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="special" role="tabpanel" aria-labelledby="special-tab">
                                 <div class="row shop_container">
-                                    @include('components.special_product_card')
+                                    @include('components.product_card', [
+                                        'products' => $special_products
+                                    ])
                                 </div>
                             </div>
                         </div>
