@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="Anil z" name="author" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta
       name="description"
       content="Shopwise is Powerful features and You Can Use The Perfect Build this Template For Any eCommerce Website. The template is built for sell Fashion Products, Shoes, Bags, Cosmetics, Clothes, Sunglasses, Furniture, Kids Products, Electronics, Stationery Products and Sporting Goods."
@@ -333,5 +334,24 @@
     <script src="{{ asset('js/jquery.elevatezoom.js') }}"></script>
     <!-- scripts js -->
     <script src="{{ asset('js/scripts.js') }}"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        function addToCart(productId) {
+            axios.post('{{ route('cart.add') }}', {
+                product_id: productId,
+            })
+            .then(function (response) {
+                alert(response.data.message); // অথবা sweetalert/toast ব্যবহার করো
+            })
+            .catch(function (error) {
+                console.error(error);
+                alert('Something went wrong!');
+            });
+        }
+    </script>
   </body>
 </html>

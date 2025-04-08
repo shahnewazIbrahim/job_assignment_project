@@ -15,11 +15,27 @@ class CartController extends Controller
         return view('cart', compact('cartItems'));
     }
 
-    public function add($productId)
+    // public function add($productId)
+    // {
+    //     $cart = Cart::firstOrCreate(['product_id' => $productId]);
+    //     $cart->increment('quantity');
+    //     return redirect()->back()->with('success', 'Product added to cart!');
+    // }
+
+    public function add(Request $request)
     {
+        $productId = $request->input('product_id');
+
+        // // এখানে তোমার লজিক, session বা DB তে যোগ করার জন্য
+        // $cart = session()->get('cart', []);
+        // $cart[$productId] = ($cart[$productId] ?? 0) + 1;
+
+        // session()->put('cart', $cart);
         $cart = Cart::firstOrCreate(['product_id' => $productId]);
         $cart->increment('quantity');
         return redirect()->back()->with('success', 'Product added to cart!');
+
+        return response()->json(['message' => 'Product added to cart successfully']);
     }
 
     public function update(Request $request, $id)
