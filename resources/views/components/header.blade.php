@@ -845,9 +845,12 @@
                 <ul class="cart_list">
                     @foreach ($cartItems as $item)
                         <li>
-                            <a href="#" class="item_remove"
+                            {{-- <a href="#" class="item_remove"
                               ><i class="ion-close"></i
-                            ></a>
+                            ></a> --}}
+                            <a href="#" class="item_remove" onclick="event.preventDefault(); document.getElementById('remove-form-{{ $item->id }}').submit();">
+                                <i class="ion-close"></i>
+                            </a>
                             <a href="#"
                               >
                               <img
@@ -863,10 +866,10 @@
                               >{{ number_format($item->product->price, 2) }}</span
                             >
                           </li>
-                        {{-- <form id="remove-form-{{ $item->id }}" action="{{ route('cart.remove', $item->id) }}" method="POST" style="display: none;">
+                        <form id="remove-form-{{ $item->id }}" action="{{ route('cart.remove', $item->id) }}" method="POST" style="display: none;">
                             @csrf
                             @method('DELETE')
-                        </form> --}}
+                        </form>
                     @endforeach
                 </ul>
 
