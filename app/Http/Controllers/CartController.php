@@ -31,8 +31,18 @@ class CartController extends Controller
         // $cart[$productId] = ($cart[$productId] ?? 0) + 1;
 
         // session()->put('cart', $cart);
-        $cart = Cart::firstOrCreate(['product_id' => $productId]);
-        $cart->increment('quantity');
+
+        $cart = Cart::where('product_id', $productId)->first();
+
+        if ($cart) {
+            $cart->increment('quantity');
+        } else {
+            Cart::create([
+                'product_id' => $productId,
+                'quantity' => 1,
+            ]);
+        }
+
         return response()->json(['message' => 'Product added to cart successfully']);
     }
 
