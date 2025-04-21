@@ -21,7 +21,7 @@
         <div class="product_action_box">
             <ul class="list_none pr_action_btn">
                 <li class="add-to-cart">
-                    <a href="#"><i class="icon-basket-loaded"></i> Add To
+                    <a href="javascript:void(0)" onclick="addToCart({{ $product->id }})"><i class="icon-basket-loaded"></i> Add To
                         Cart</a>
                 </li>
                 <li>

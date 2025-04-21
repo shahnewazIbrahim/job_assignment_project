@@ -67,7 +67,7 @@
     <div class="bottom_header dark_skin main_menu_uppercase">
       <div class="container">
         <nav class="navbar navbar-expand-lg">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="{{ url('/') }}">
             <img
               class="logo_light"
               src="{{ asset('images/logo_light.png') }}"
@@ -105,7 +105,7 @@
                     <li>
                       <a
                         class="dropdown-item nav-link nav_item active"
-                        href="index.html"
+                        href="{{ url('/') }}"
                         >Fashion 1</a
                       >
                     </li>
@@ -802,10 +802,10 @@
                 href="#"
                 data-bs-toggle="dropdown"
                 ><i class="linearicons-cart"></i
-                ><span class="cart_count">2</span></a
+                ><span class="cart_count">{{ $cartItems->count() }}</span></a
               >
               <div class="cart_box dropdown-menu dropdown-menu-right">
-                <ul class="cart_list">
+                {{-- <ul class="cart_list">
                   <li>
                     <a href="#" class="item_remove"
                       ><i class="ion-close"></i
@@ -840,13 +840,45 @@
                       >81.00</span
                     >
                   </li>
+                </ul> --}}
+
+                <ul class="cart_list">
+                    @foreach ($cartItems as $item)
+                        <li>
+                            {{-- <a href="#" class="item_remove"
+                              ><i class="ion-close"></i
+                            ></a> --}}
+                            <a href="#" class="item_remove" onclick="event.preventDefault(); document.getElementById('remove-form-{{ $item->id }}').submit();">
+                                <i class="ion-close"></i>
+                            </a>
+                            <a href="#"
+                              >
+                              <img
+                                src="{{ asset( $item->product->image) }}"
+                                alt="{{ $item->product->title }}"
+                              />
+                              {{ $item->product->title }}
+                            </a>
+                            <span class="cart_quantity">
+                              {{ $item->quantity }} x
+                              <span class="cart_amount">
+                                <span class="price_symbole">৳</span></span
+                              >{{ number_format($item->product->price, 2) }}</span
+                            >
+                          </li>
+                        <form id="remove-form-{{ $item->id }}" action="{{ route('cart.remove', $item->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    @endforeach
                 </ul>
+
                 <div class="cart_footer">
                   <p class="cart_total">
                     <strong>Subtotal:</strong>
                     <span class="cart_price">
-                      <span class="price_symbole">$</span></span
-                    >159.00
+                      <span class="price_symbole">৳</span></span
+                    >{{ number_format($subtotal, 2) }}
                   </p>
                   <p class="cart_buttons">
                     <a href="#" class="btn btn-fill-line rounded-0 view-cart"
