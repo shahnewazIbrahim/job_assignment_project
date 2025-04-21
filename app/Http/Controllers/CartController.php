@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -43,7 +44,14 @@ class CartController extends Controller
             ]);
         }
 
-        return response()->json(['message' => 'Product added to cart successfully']);
+        $allCarts = Cart::with('product:id,title,image,price,old_price,discount')->get();
+        CartResource::withoutWrapping();
+        $allCartsResource = CartResource::collection($allCarts);
+        return response()->json([
+            'cartCount' => $allCarts->count(),
+            'items' => $allCartsResource,
+            'message' => 'Product added to cart successfully'
+        ]);
     }
 
     public function update(Request $request, $id)

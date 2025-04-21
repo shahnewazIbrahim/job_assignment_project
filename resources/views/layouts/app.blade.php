@@ -318,7 +318,44 @@
                     // alert(response.data.message);
                     toastr.options.closeButton = true;
                     toastr.options.backgroundColor = "#28a745";
-                    toastr.success(response.data.message, 'Success!');
+                    toastr.info(response.data.message, 'Success!');
+                    document.querySelector('.cart_count').innerText = response.data.cartCount ?? 0;
+                    if (response?.data?.items?.length) {
+                        let html = ''
+                        document.querySelector('.cart_list').innerHTML = ''
+
+                        for (const item of response.data.items) {
+                            const url = `{{ route('cart.remove', '__ITEM_ID__') }}`.replace('__ITEM_ID__', item.id);
+                            
+                            html += `
+                            <li>
+                            <a href="#" class="item_remove" onclick="event.preventDefault(); document.getElementById('remove-form-${item.id}').submit();">
+                                <i class="ion-close"></i>
+                            </a>
+                            <a href="#"
+                              >
+                              <img
+                                src="${item.productImage}"
+                                alt="${item.productName}"
+                              />
+                              ${item.productName}
+                            </a>
+                            <span class="cart_quantity">
+                              ${item.quantity} x
+                              <span class="cart_amount">
+                                <span class="price_symbole">৳</span></span
+                              >${item.price}</span
+                            >
+                          </li>
+                        <form id="remove-form-${item.id}" action="${url}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                            `
+                        }
+                        document.querySelector('.cart_list').innerHTML = html
+
+                    }
                 })
                 .catch(function(error) {
                     console.error(error);
